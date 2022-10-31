@@ -12,12 +12,40 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="../views/dist/css/adminlte.min.css">
 </head>
-<body class="hold-transition sidebar-mini">
-<!-- Site wrapper -->
-<div class="wrapper">
+//**Custom Body */
+<body class="hold-transition  skin-bluue sidebar-collapse sidebar-mini login-page">
+<?php
+if(isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == "ok"){
+echo '<div class="wrapper">';
+//header
+include "modulos/header.php";
 
-</div>
-<!-- ./wrapper -->
+//nav
+include "moduo/nav.php";
+
+//content
+if(isset($_GET["ruta"])){
+    if($_GET["ruta"] == "inicio" ||
+       $_GET["ruta"] == "usuarios" ||
+       $_GET["ruta"] == "salir"){
+
+        include "modulos/".$_GET["ruta"].".php";
+}else{
+    include "modulos/404.php";
+}
+
+}else{
+    include "moduos/incio.php";
+}
+
+//footer
+include "modulos/footer.php";
+echo '</div>';
+}else{
+    include "modulos/login.php";
+}
+
+?>
 
 <!-- jQuery -->
 <script src="../views/plugins/jquery/jquery.min.js"></script>
